@@ -1,0 +1,54 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  box-shadow: 0px 4px 4px rgba(87, 87, 87, 0.25);
+  background-color: black;
+}
+
+.header-left img {
+  margin-left: 60px;
+  width: 150px;
+}
+
+.header-right {
+  display: flex;
+  margin-right: 80px;
+}
+
+.header-right img {
+  width: 50px;
+  height: 50px;
+}
+
+.foto-profile {
+  width: auto;
+  height: auto;
+  margin-left: -5px;
+}
+
+.profile-dropdown-list {
+  color: black;
+  margin-left: 30px;
+}
+
+.login {
+  border: none;
+  border-radius: 8px;
+  background-color: #ee4622;
+  width: 100px;
+  height: 30px;
+  margin-left: 30px;
+  color: white;
+  text-align: center;
+}
+
+.register {
+  border: 1.5px solid white;
+  border-radius: 8px;
+  background-color: black;
+  width: 100px;
+  color: white;
+}
