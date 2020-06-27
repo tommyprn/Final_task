@@ -31,7 +31,7 @@
 
 .profile-dropdown-list {
   color: black;
-  margin-left: 30px;
+  margin-left: 10px;
 }
 
 .login {
@@ -51,4 +51,9 @@
   background-color: black;
   width: 100px;
   color: white;
+}
+
+.Logout {
+  border: none;
+  background-color: white;
 }

@@ -1,48 +1,18 @@
-import { LOGIN, REGISTER, GET_USER } from "../constant/action-types";
-import { API, setAuthToken } from "../../config/api";
+import {
+  GET_TRANSACTION,
+  POST_TRANSACTION,
+  PATCH_TRANSACTION,
+} from "../constant/action-types";
+import { API } from "../../config/api";
 
-export const login = (users) => {
+export const getTransaction = () => {
   return {
-    type: LOGIN,
+    type: GET_TRANSACTION,
     payload: async () => {
       try {
         const {
           data: { data },
-        } = await API.post("/login", users);
-
-        localStorage.setItem("id", data.id);
-        localStorage.setItem("token", data.token);
-        setAuthToken(data.token);
-
-        const ids = data.id;
-        const {
-          data: { data: dataUser },
-        } = await API.get("/user/" + ids);
-        localStorage.setItem("role", dataUser.role);
-
-        return dataUser;
-      } catch (error) {
-        if (error.response) {
-          const { data, status } = error.response;
-
-          if (status > 399) throw data.error;
-        }
-      }
-    },
-  };
-};
-
-export const register = (user) => {
-  return {
-    type: REGISTER,
-    payload: async () => {
-      try {
-        const {
-          data: { data },
-        } = await API.post("/register", user);
-
-        localStorage.setItem("token", data.token);
-        setAuthToken(data.token); //Set header token
+        } = await API.get("/transaction");
 
         return data;
       } catch (error) {
@@ -56,14 +26,43 @@ export const register = (user) => {
   };
 };
 
-export const getUser = (id) => {
+export const addTransaction = (transaction) => {
   return {
-    type: GET_USER,
+    type: POST_TRANSACTION,
     payload: async () => {
       try {
         const {
           data: { data },
-        } = await API.get("/user/" + id);
+        } = await API.post("/transaction", transaction);
+
+        return data;
+      } catch (error) {
+        if (error.response) {
+          const { data, status } = error.response;
+
+          if (status > 399) throw data.error;
+        }
+      }
+    },
+  };
+};
+
+export const patchTransaction = (status, id) => {
+  return {
+    type: PATCH_TRANSACTION,
+    payload: async () => {
+      try {
+        const formData = new FormData();
+        formData.append("status", status);
+
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
+        const {
+          data: { data },
+        } = await API.patch("/transaction/" + id);
 
         return data;
       } catch (error) {

@@ -1,0 +1,42 @@
+.form-add-song {
+  display: block;
+  text-align: center;
+  margin-top: 200px;
+  background-color: black;
+}
+
+.judul-add-song {
+  color: red;
+  font-size: 30px;
+  position: absolute;
+  left: 367px;
+  top: 170px;
+}
+
+.save-song {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: red;
+  width: 170px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.custom-input {
+  border-radius: 5px;
+  border: solid grey;
+  width: 800px;
+  background-color: rgb(53, 53, 53);
+  margin-bottom: 20px;
+}
+
+.add-artistId {
+  width: 800px !important;
+  margin-bottom: 20px;
+  margin-left: 367px;
+  background-color: rgb(53, 53, 53) !important;
+  color: rgb(126, 126, 126) !important;
+  border-radius: 5px !important;
+  border: solid grey !important;
+}

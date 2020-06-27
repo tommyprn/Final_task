@@ -1,6 +1,7 @@
 .homes {
   background-color: black;
   color: white;
+  margin-bottom: 200px;
 }
 
 .jumbo-tron {
@@ -21,19 +22,94 @@
 }
 
 .summary-home {
-  top: 300px;
-  left: 500px;
-  position: absolute;
+  z-index: 1;
+  margin-top: -700px;
   font-size: 50px;
   text-shadow: 0px 0px 50px #f2f2f2;
 }
 
 .summary-tambahan-home {
-  position: absolute;
-  top: 400px;
-  left: 280px;
+  z-index: 1;
+  margin-top: -560px;
   width: 1000px;
   font-size: 30px;
   text-align: center;
   text-shadow: 0px 0px 50px #f2f2f2;
+}
+
+.extend-text {
+  margin-top: -150px;
+  margin-bottom: 150px;
+  z-index: 1;
+  font-size: 30px;
+  text-align: center;
+  color: rgb(255, 70, 70);
+  text-shadow: 0px 0px 10px red;
+}
+
+.thumbnail-song {
+  position: relative;
+  margin-left: 100px;
+}
+
+.thumbnail-container {
+  margin-right: 30px;
+  background-color: rgb(66, 66, 66, 0.6);
+  border-radius: 10px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.thumbnail-container img {
+  width: 170px;
+  height: 170px;
+  border-radius: 10px;
+}
+
+.detail-container {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.release-year {
+  font-size: 10px;
+  font-weight: bold;
+  color: rgb(158, 158, 158);
+}
+
+.flex-text {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: -10px;
+  font-size: 12px;
+}
+
+.artist-name {
+  font-size: 16px;
+}
+
+.progress-bar {
+  background-color: transparent !important;
+  max-width: 50% !important;
+}
+
+.progress-bar-content {
+  margin-right: -80px;
+}
+
+.player-content {
+  padding-right: 50px;
+}
+
+.play-sounds {
+  padding-right: 20px !important;
+}
+
+.audio-lists-btn {
+  padding-right: 30px !important;
+}
+
+.next-audio {
+  padding-right: 50px;
 }

@@ -7,8 +7,9 @@ import { Modal, Form } from "react-bootstrap";
 class Login extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { data: {} };
+    this.state = {
+      data: {},
+    };
   }
 
   handleChange = (event) => {
@@ -26,6 +27,7 @@ class Login extends React.Component {
 
   render() {
     const { data } = this.state;
+
     return (
       <Modal size="sm" show={this.props.show} onHide={this.props.onHide}>
         <Modal.Body className="modaldasar">
@@ -54,6 +56,7 @@ class Login extends React.Component {
             </Form.Group>
 
             <button
+              type="submit"
               className="tombollogin"
               onClick={this.props.handleLoginClick}
             >
@@ -61,7 +64,10 @@ class Login extends React.Component {
             </button>
             <p className="kalimat-baru">
               New on DumbSound?
-              <span>Click Here</span>
+              <a href="/register" className="redirect-register">
+                {" "}
+                Click Here
+              </a>
             </p>
           </Form>
         </Modal.Body>

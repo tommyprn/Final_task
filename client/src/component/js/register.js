@@ -17,6 +17,7 @@ class Register extends Component {
       data: { ...data, [event.target.name]: event.target.value },
     });
   };
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.register(this.state.data);
@@ -24,7 +25,6 @@ class Register extends Component {
   };
 
   render() {
-    const { data: dataUser, loading, error } = this.props.auth;
     const { data } = this.state;
     return (
       <Modal size="sm" show={this.props.show} onHide={this.props.onHide}>
@@ -101,7 +101,10 @@ class Register extends Component {
             </button>
             <p className="kalimat-baru">
               Already have an account?
-              <span>Login Here</span>
+              <a href="/login" className="redirect-login">
+                {" "}
+                Login Here
+              </a>
             </p>
           </Form>
         </Modal.Body>

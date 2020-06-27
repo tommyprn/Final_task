@@ -6,6 +6,7 @@ import { postArtist } from "../../redux/actions/artist";
 class AddArtist extends Component {
   constructor(props) {
     super(props);
+
     this.state = { data: {} };
   }
 
@@ -15,6 +16,7 @@ class AddArtist extends Component {
       data: { ...data, [event.target.name]: event.target.value },
     });
   };
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.postArtist(this.state.data);
@@ -25,8 +27,8 @@ class AddArtist extends Component {
     const { data } = this.state;
 
     return (
-      <form className="form-add-episode" onSubmit={this.handleSubmit}>
-        <p className="judul-add-episode">Add Artist</p>
+      <form className="form-add-artist" onSubmit={this.handleSubmit}>
+        <p className="judul-add-artist">Add Artist</p>
         <div>
           <input
             name="name"
@@ -42,7 +44,7 @@ class AddArtist extends Component {
           <input
             name="age"
             value={data.age ? data.age : ""}
-            type="text"
+            type="number"
             className="custom-input"
             placeholder="Age"
             onChange={this.handleChange}
@@ -52,7 +54,7 @@ class AddArtist extends Component {
         <div className="form-group-basic">
           <input
             name="type"
-            value={data.type ? data.linkEp : ""}
+            value={data.type ? data.type : ""}
             type="text"
             className="custom-input"
             placeholder="Type"
@@ -64,14 +66,14 @@ class AddArtist extends Component {
           <input
             name="debut"
             value={data.debut ? data.debut : ""}
-            type="text"
+            type="number"
             className="custom-input"
             placeholder="Debut year"
             onChange={this.handleChange}
           />
         </div>
 
-        <button className="tombol-save-episode" type="submit">
+        <button className="save-artist" type="submit">
           Submit
         </button>
       </form>

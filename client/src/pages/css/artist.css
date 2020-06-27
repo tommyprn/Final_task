@@ -1,0 +1,33 @@
+.form-add-artist {
+  display: block;
+  text-align: center;
+  margin-top: 200px;
+  background-color: black;
+}
+
+.judul-add-artist {
+  color: red;
+  font-size: 30px;
+  position: absolute;
+  left: 367px;
+  top: 170px;
+}
+
+.save-artist {
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: red;
+  width: 170px;
+  height: 30px;
+  font-size: 18px;
+}
+
+.custom-input {
+  border-radius: 5px;
+  border: solid grey;
+  width: 800px;
+  background-color: rgb(53, 53, 53);
+  color: white;
+  margin-bottom: 20px;
+}

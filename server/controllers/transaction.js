@@ -1,4 +1,5 @@
 const { User, Transaction } = require("../models");
+const dayjs = require("dayjs");
 
 exports.read = async (req, res) => {
   try {
@@ -45,8 +46,12 @@ exports.readOne = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
+    let d1 = dayjs();
+    let d2 = dayjs().add(30, "day");
     const transaction = await Transaction.create({
       ...req.body,
+      startDate: d1,
+      dueDate: d2,
       attachment: req.file.filename,
     });
     res.send({ data: transaction });

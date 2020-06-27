@@ -6,7 +6,6 @@ import { Provider } from "react-redux";
 import store from "./redux";
 import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
-import ReactJkMusicPlayer from "react-jinke-music-player";
 import "react-jinke-music-player/assets/index.css";
 
 ReactDOM.render(

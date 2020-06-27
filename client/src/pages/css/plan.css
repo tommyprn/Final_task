@@ -1,0 +1,53 @@
+.premium {
+  position: absolute;
+  top: 150px;
+  left: 450px;
+  color: white;
+}
+.upgrade-plan {
+  font-size: 18px;
+  text-align: center;
+  font-family: sans-serif;
+}
+.dumb {
+  color: rgb(228, 18, 18);
+}
+input[type="file"] {
+  display: none;
+}
+
+.dumbsound {
+  color: rgb(228, 18, 18);
+}
+
+.dumbsound-phone {
+  color: white;
+}
+
+.bukti-trf {
+  border-radius: 5px;
+  background-color: none;
+  padding: 6px 12px;
+  font-weight: bold;
+  cursor: pointer;
+  color: red;
+  width: 400px;
+  border: solid gray;
+}
+
+.nomor-id {
+  width: 400px;
+  margin-left: 140px;
+  margin-top: 40px;
+}
+
+.kirim {
+  width: 400px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 0px;
+  background-color: red;
+  color: white;
+  height: 40px;
+  margin-top: 40px;
+}

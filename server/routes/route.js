@@ -45,21 +45,21 @@ route.get("/user/:id", findUser);
 route.delete("/user/:id", auth, admin, destroyUser); //PRIVATE
 
 route.post("/transaction", auth, upload, addTransaction);
-route.get("/transaction", auth, admin, findTransactions); //PRIVATE
+route.get("/transaction", findTransactions); //PRIVATE
 route.get("/transaction/:id", auth, findTransaction);
-route.patch("/transaction/:id", auth, admin, patchTransaction); //PRIVATE
+route.patch("/transaction/:id", patchTransaction); //PRIVATE
 route.delete("/transaction/:id", auth, admin, destroyTransaction); //PRIVATE
 
-route.post("/artist", auth, admin, addArtist); //PRIVATE
+route.post("/artist", addArtist); //PRIVATE
 route.get("/artist", findArtists);
 route.get("/artist/:id", auth, findArtist);
 route.patch("/artist/:id", auth, admin, patchArtist); //PRIVATE
 route.delete("/artist/:id", auth, admin, destroyArtist); //PRIVATE
 
-route.post("/song", auth, admin, addSong); //PRIVATE
+route.post("/song", addSong); //PRIVATE
 route.get("/song", findSongs);
 route.get("/song/:id", auth, findSong);
-route.patch("/song/:id", auth, admin, patchSong); //PRIVATE
+route.patch("/song/:id", patchSong); //PRIVATE
 route.delete("/song/:id", auth, admin, destroySong); //PRIVATE
 
 module.exports = route;

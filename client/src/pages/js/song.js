@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../css/artist.css";
+import "../css/song.css";
 import { connect } from "react-redux";
 import { postSong } from "../../redux/actions/song";
 import { getAllArtist } from "../../redux/actions/artist";
@@ -16,7 +16,9 @@ class AddSong extends Component {
     this.setState({
       data: { ...data, [event.target.name]: event.target.value },
     });
+    console.log(data);
   };
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.postSong(this.state.data);
@@ -30,10 +32,11 @@ class AddSong extends Component {
   render() {
     const { data } = this.state;
     const { data: dataArtist } = this.props.artist;
+    let a = Object.values(dataArtist);
 
     return (
-      <form className="form-add-episode" onSubmit={this.handleSubmit}>
-        <p className="judul-add-episode">Add Artist</p>
+      <form className="form-add-song" onSubmit={this.handleSubmit}>
+        <p className="judul-add-song">Add Music</p>
         <div>
           <input
             name="title"
@@ -49,7 +52,7 @@ class AddSong extends Component {
           <input
             name="year"
             value={data.year ? data.year : ""}
-            type="text"
+            type="number"
             className="custom-input"
             placeholder="Year release"
             onChange={this.handleChange}
@@ -73,9 +76,9 @@ class AddSong extends Component {
           value={data.artistId}
           onChange={this.handleChange}
           placeholder="Artist"
-          className="category-add-film"
+          className="add-artistId"
         >
-          {dataArtist.map((artist) => {
+          {a.map((artist) => {
             return <option value={artist.id}>{artist.name}</option>;
           })}
         </Form.Control>
@@ -91,7 +94,7 @@ class AddSong extends Component {
           />
         </div>
 
-        <button className="tombol-save-episode" type="submit">
+        <button className="save-song" type="submit">
           Submit
         </button>
       </form>

@@ -1,5 +1,5 @@
 import { GET_SONG, POST_SONG } from "../constant/action-types";
-import { API } from "../../config/api";
+import { API, setAuthToken } from "../../config/api";
 
 export const getAllSong = () => {
   return {
@@ -8,7 +8,7 @@ export const getAllSong = () => {
       try {
         const response = await API.get("/song");
 
-        return response.data.songs;
+        return response.data.data;
       } catch (error) {
         if (error.response) {
           const { data, status } = error.response;
@@ -20,14 +20,14 @@ export const getAllSong = () => {
   };
 };
 
-export const postSong = () => {
+export const postSong = (song) => {
   return {
     type: POST_SONG,
     payload: async () => {
       try {
-        const response = await API.get("/song");
+        const response = await API.post("/song", song);
 
-        return response.data.songs;
+        return response.data.data;
       } catch (error) {
         if (error.response) {
           const { data, status } = error.response;

@@ -2,7 +2,7 @@ import { GET_ALL_ARTIST, POST_ARTIST } from "../../redux/constant/action-types";
 import { ActionType } from "redux-promise-middleware";
 
 const initialState = {
-  data: [],
+  data: {},
   loading: true,
   error: null,
 };

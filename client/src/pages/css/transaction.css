@@ -1,0 +1,46 @@
+.tabel-utama {
+  width: 1200px;
+  height: auto;
+  font-size: 12px;
+  position: absolute;
+  top: 200px;
+  left: 150px;
+  font-family: sans-serif;
+  border: 1px solid #ddd;
+}
+
+.tabel-utama th {
+  border-bottom: 1px solid #ddd;
+  padding-left: 12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+}
+
+.tabel-utama tr:nth-child(even) {
+  background-color: rgb(59, 59, 59);
+}
+
+.badan-tabel tr:hover {
+  background-color: rgb(99, 99, 99);
+}
+
+.kepala-tabel {
+  color: red;
+  font-weight: bold;
+  background-color: rgb(59, 59, 59);
+}
+
+.badan-tabel {
+  color: white;
+  font-weight: lighter;
+}
+
+.incoming {
+  color: white;
+  font-size: 30px;
+  position: absolute;
+  top: 120px;
+  left: 150px;
+  font-family: sans-serif;
+}

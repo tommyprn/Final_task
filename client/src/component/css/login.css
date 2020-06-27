@@ -1,0 +1,47 @@
+.modaldasar {
+  background-color: black;
+  border-radius: 5px;
+}
+
+.judulmodal {
+  color: white;
+  margin-bottom: 30px;
+}
+
+.email {
+  padding-top: 10px;
+}
+
+.pass {
+  padding-top: 10px;
+  padding-bottom: 30px;
+}
+
+.tombollogin {
+  border-radius: 5px;
+  border-color: white;
+  background-color: #e50914;
+  border: none;
+  color: white;
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 17px;
+  width: 266px;
+  height: 40px;
+}
+
+.kalimat-baru {
+  padding-top: 20px;
+  text-align: center;
+  color: white;
+  font-family: Product Sans;
+  font-style: normal;
+  font-size: 14px;
+}
+
+.redirect-register {
+  font-weight: bold;
+  color: red !important;
+}

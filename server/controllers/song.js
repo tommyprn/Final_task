@@ -15,11 +15,11 @@ exports.read = async (req, res) => {
     });
     if (!song)
       return res.status(400).send({
-        songs: {
+        data: {
           message: "No Song",
         },
       });
-    res.status(200).send({ songs: song });
+    res.status(200).send({ data: song });
   } catch (error) {
     res.status(500).send({
       error: {
@@ -48,7 +48,7 @@ exports.readOne = async (req, res) => {
       },
     });
 
-    res.send({ songs: song });
+    res.send({ data: song });
   } catch (error) {
     console.log(error);
   }
@@ -59,7 +59,7 @@ exports.create = async (req, res) => {
     const song = await Song.create({
       ...req.body,
     });
-    res.send({ songs: song });
+    res.send({ data: song });
   } catch (error) {
     console.log(error);
   }

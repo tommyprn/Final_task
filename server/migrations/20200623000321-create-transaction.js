@@ -9,12 +9,15 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       startDate: {
+        allowNull: false,
         type: Sequelize.DATE,
       },
       dueDate: {
+        allowNull: false,
         type: Sequelize.DATE,
       },
       userId: {
+        allowNull: false,
         type: Sequelize.INTEGER,
         references: {
           model: "Users",
@@ -24,12 +27,13 @@ module.exports = {
         onDelete: "CASCADE",
       },
       attachment: {
+        allowNull: false,
         type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.ENUM,
-        values: ["Cancel", "Approved", "Pending"],
-        devaultValue: "Pending",
+        allowNull: false,
+        type: Sequelize.ENUM("Cancel", "Approved", "Pending"),
+        defaultValue: "Pending",
       },
       createdAt: {
         allowNull: false,

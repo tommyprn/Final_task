@@ -2,7 +2,7 @@ import { GET_SONG, POST_SONG } from "../../redux/constant/action-types";
 import { ActionType } from "redux-promise-middleware";
 
 const initialState = {
-  data: [],
+  data: {},
   loading: true,
   error: null,
 };

@@ -1,62 +1,61 @@
 import React, { Component } from "react";
 import "../css/header.css";
-// import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import LoginModal from "../js/login";
-import RegisterModal from "../js/register";
+import RegisterModal from "./register";
 import { Dropdown, DropdownButton, Image } from "react-bootstrap";
 
-function AdminButton(props) {
+function User(props) {
   return (
-    <div className="header-right">
-      <DropdownButton
-        alignRight
-        title={
-          <Image
-            src={
-              "https://apollo-singapore.akamaized.net/v1/files/lrtdeeoj2jtl1-ID/image"
-            }
-            roundedCircle
-            className="foto-profile"
-          />
-        }
-        id="dropdown-menu"
-        variant="black"
-        className="drop-button"
-      >
-        {/* <Link to="/transaction"> */}
+    <div>
+      <li className="profile-dropdown-list">
+        <i
+          class="far fa-address-card"
+          style={{ margin: "10px", color: "red" }}
+        />
+        Play
+      </li>
+      <Link to="/upgrade-plan">
         <li className="profile-dropdown-list">
           <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
+          Payment
+        </li>
+      </Link>
+    </div>
+  );
+}
+
+function Admin(props) {
+  return (
+    <div>
+      <Link to="/Song">
+        <li className="profile-dropdown-list">
+          <i class="fas fa-music" style={{ margin: "10px", color: "red" }}></i>
           Add Music
         </li>
-        {/* </Link>
-         {/* <Link to="/transaction"> */}
+      </Link>
+      <Link to="/artist">
         <li className="profile-dropdown-list">
-          <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
+          <i
+            class="fas fa-user-plus"
+            style={{ margin: "10px", color: "red" }}
+          ></i>
           Add Artist
         </li>
-        {/* </Link>
-        <Link to="/films"> */}
+      </Link>
+      <Link to="/transaction">
         <li className="profile-dropdown-list">
-          <i class="fa fa-film" style={{ margin: "10px", color: "red" }}></i>
+          <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
           Transaction
         </li>
-        {/* </Link> */}
-        <Dropdown.Divider />
-        <button onClick={props.handleLogoutClick} className="Logout">
-          <li className="profile-dropdown-list">
-            <i
-              class="fas fa-times"
-              style={{ margin: "10px", color: "red" }}
-            ></i>
-            Logout
-          </li>
-        </button>
-      </DropdownButton>
+      </Link>
     </div>
   );
 }
 
 function UserButton(props) {
+  let a = localStorage.getItem("role");
+
   return (
     <div className="header-right">
       <DropdownButton
@@ -74,21 +73,8 @@ function UserButton(props) {
         variant="black"
         className="drop-button"
       >
-        {/* <Link to="/profile"> */}
-        <li className="profile-dropdown-list">
-          <i
-            class="far fa-address-card"
-            style={{ margin: "10px", color: "red" }}
-          />
-          Play
-        </li>
-        {/* </Link> */}
-        {/* <Link to="/plan"> */}
-        <li className="profile-dropdown-list">
-          <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
-          Payment
-        </li>
-        {/* </Link> */}
+        {a === "true" ? <Admin /> : <User />}
+
         <Dropdown.Divider />
         <button onClick={props.handleLogoutClick} className="Logout">
           <li className="profile-dropdown-list">
@@ -124,7 +110,7 @@ function AuthButton(props) {
 class Header extends Component {
   constructor(props) {
     super(props);
-    this.state = { isModalOpen: false, isRegis: false, isLoggedIn: false };
+    this.state = { isModalOpen: false, isRegis: false };
   }
 
   handleToggleModal = (isRegis = false) => {
@@ -135,29 +121,40 @@ class Header extends Component {
     });
   };
 
+  //jadi ini saat di click loginnya dia langsung set isLoggedIn jadi true mas tanpa verifikasi
   handleLoginClick = () => {
     this.setState({ isLoggedIn: true });
   };
 
   handleLogoutClick = () => {
     this.setState({ isLoggedIn: false });
+    localStorage.removeItem("role");
+    localStorage.removeItem("id");
+    localStorage.removeItem("token");
   };
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
 
+    // let token = false;
+    // if (localStorage.token) {
+    //   token = true;
+    // }
+
     return (
       <>
         <div className="header">
           <div className="header-left">
-            <img src={"https://i.ibb.co/w48mSWX/DUMBSOUND-1.png"} alt="Logo" />
+            <Link to="/">
+              <img
+                src={"https://i.ibb.co/w48mSWX/DUMBSOUND-1.png"}
+                alt="Logo"
+              />
+            </Link>
           </div>
 
-          {/* <UserButton handleLogoutClick={this.handleLogoutClick} /> */}
-          {/* ) : ( */}
-
           {isLoggedIn ? (
-            <AdminButton handleLogoutClick={this.handleLogoutClick} />
+            <UserButton handleLogoutClick={this.handleLogoutClick} />
           ) : (
             <AuthButton handleToggleModal={this.handleToggleModal} />
           )}
@@ -184,4 +181,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

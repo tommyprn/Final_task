@@ -14,3 +14,4 @@ export const GET_USER = "GET_USER";
 //Transaction
 export const GET_TRANSACTION = "GET_TRANSACTION";
 export const POST_TRANSACTION = "POST_TRANSACTION";
+export const PATCH_TRANSACTION = "PATCH_TRANSACTION";

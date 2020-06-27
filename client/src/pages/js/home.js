@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/home.css";
 import { connect } from "react-redux";
 import { getAllSong } from "../../redux/actions/song";
-// import { Link } from "react-router-dom";
+import ReactJkMusicPlayer from "react-jinke-music-player";
 
 class Home extends Component {
   componentDidMount() {
@@ -12,7 +12,6 @@ class Home extends Component {
   render() {
     const { data: songData } = this.props.song;
     let a = Object.values(songData);
-
     return (
       <div className="homes">
         <img
@@ -21,33 +20,57 @@ class Home extends Component {
           className="jumbo-tron"
         />
         <div className="rectangle"></div>
-        <p className="summary-home">Connect on DumbSound</p>
+        <div className="row justify-content-center">
+          <p className="summary-home">Connect on DumbSound</p>
+        </div>
+        <div className="row justify-content-center">
+          <p className="summary-tambahan-home">
+            Discover, Stream, and share a constantly expanding mix of music from
+            emerging and major artists around the globe
+          </p>
+        </div>
 
-        <p className="summary-tambahan-home">
-          Discover, Stream, and share a constantly expanding mix of music from
-          emerging and major artists around the globe
-        </p>
+        <div className="row justify-content-center">
+          <p className="extend-text">Start your music journey now</p>
+        </div>
 
-        <div className="thumbnail-song-home">
+        <div className="thumbnail-song">
           <div className="row justify-content-start">
             {a.map((song) => {
               return (
-                //   <Link to="/detail" key={tvseries.id}>
-                <div>
+                <div className="thumbnail-container">
                   <img
-                    className="timbul"
+                    className="song-box"
                     src={song.thumbnail}
                     alt="Singles thumbnail"
                   />
-                  <p></p>
-                  <p>{song.title}</p>
-                  <p className="release-year">{song.year}</p>
+                  <div className="detail-container">
+                    <div className="flex-text">
+                      <p>{song.title}</p>
+                      <p className="release-year">{song.year}</p>
+                    </div>
+                    <p className="artist-name">{song.Artist.name}</p>
+                  </div>
                 </div>
-                //   </Link>
               );
             })}
           </div>
         </div>
+        <ReactJkMusicPlayer
+          mode="full"
+          // audioLists={playlist}
+          defaultPlayIndex={0}
+          autoPlay={false}
+          showDownload={false}
+          showThemeSwitch={false}
+          toggleMode={false}
+          responsive={false}
+          showMiniModeCover={true}
+          showDestroy={true}
+          showReload={false}
+          // playIndex={playIndex}
+          onAudioPlay={(audioInfo) => {}}
+        />
       </div>
     );
   }

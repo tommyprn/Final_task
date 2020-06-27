@@ -22,14 +22,14 @@ export const getAllArtist = () => {
   };
 };
 
-export const postArtist = () => {
+export const postArtist = (artist) => {
   return {
     type: POST_ARTIST,
     payload: async () => {
       try {
         const {
           data: { data },
-        } = await API.post("/artist");
+        } = await API.post("/artist", artist);
 
         return data;
       } catch (error) {
