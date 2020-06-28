@@ -10,6 +10,8 @@ export const getTransaction = () => {
     type: GET_TRANSACTION,
     payload: async () => {
       try {
+        setAuthToken(localStorage.getItem("token"));
+
         const {
           data: { data },
         } = await API.get("/transaction");
@@ -31,6 +33,8 @@ export const addTransaction = (transaction) => {
     type: POST_TRANSACTION,
     payload: async () => {
       try {
+        setAuthToken(localStorage.getItem("token"));
+
         const {
           data: { data },
         } = await API.post("/transaction", transaction);
@@ -54,6 +58,7 @@ export const patchTransaction = (status, id) => {
       try {
         const formData = new FormData();
         formData.append("status", status);
+        setAuthToken(localStorage.getItem("token"));
 
         const config = {
           headers: {

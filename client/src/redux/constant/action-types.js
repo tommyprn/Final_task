@@ -10,6 +10,7 @@ export const GET_SONG = "GET_SONG";
 export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
 export const GET_USER = "GET_USER";
+export const GET_ALL_USER = "GET_ALL_USER";
 
 //Transaction
 export const GET_TRANSACTION = "GET_TRANSACTION";

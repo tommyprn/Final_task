@@ -1,20 +1,15 @@
 import React, { Component } from "react";
 import "../css/header.css";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LoginModal from "../js/login";
 import RegisterModal from "./register";
+import { connect } from "react-redux";
+import { getUser } from "../../redux/actions/user";
 import { Dropdown, DropdownButton, Image } from "react-bootstrap";
 
 function User(props) {
   return (
     <div>
-      <li className="profile-dropdown-list">
-        <i
-          class="far fa-address-card"
-          style={{ margin: "10px", color: "red" }}
-        />
-        Play
-      </li>
       <Link to="/upgrade-plan">
         <li className="profile-dropdown-list">
           <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
@@ -121,9 +116,12 @@ class Header extends Component {
     });
   };
 
-  //jadi ini saat di click loginnya dia langsung set isLoggedIn jadi true mas tanpa verifikasi
   handleLoginClick = () => {
-    this.setState({ isLoggedIn: true });
+    {
+      this.props.user
+        ? this.setState({ isLoggedIn: true })
+        : this.setState({ isLoggedIn: false });
+    }
   };
 
   handleLogoutClick = () => {
@@ -135,12 +133,8 @@ class Header extends Component {
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
-
-    // let token = false;
-    // if (localStorage.token) {
-    //   token = true;
-    // }
-
+    const { data } = this.props.user;
+    console.log(this.props.user);
     return (
       <>
         <div className="header">
@@ -181,4 +175,10 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+export default connect(mapStateToProps, { getUser })(Header);

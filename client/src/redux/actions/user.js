@@ -1,4 +1,9 @@
-import { LOGIN, REGISTER, GET_USER } from "../constant/action-types";
+import {
+  LOGIN,
+  REGISTER,
+  GET_USER,
+  GET_ALL_USER,
+} from "../constant/action-types";
 import { API, setAuthToken } from "../../config/api";
 
 export const login = (users) => {
@@ -56,14 +61,38 @@ export const register = (user) => {
   };
 };
 
-export const getUser = (id) => {
+export const getUser = () => {
   return {
     type: GET_USER,
     payload: async () => {
       try {
+        setAuthToken(localStorage.getItem("token"));
+
         const {
           data: { data },
-        } = await API.get("/user/" + id);
+        } = await API.get("/user/");
+
+        return data;
+      } catch (error) {
+        if (error.response) {
+          const { data, status } = error.response;
+
+          if (status > 399) throw data.error;
+        }
+      }
+    },
+  };
+};
+
+export const getAllUser = () => {
+  return {
+    type: GET_ALL_USER,
+    payload: async () => {
+      try {
+        setAuthToken(localStorage.getItem("token"));
+        const {
+          data: { data },
+        } = await API.get("/user");
 
         return data;
       } catch (error) {

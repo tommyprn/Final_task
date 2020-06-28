@@ -41,7 +41,7 @@ const {
 route.post("/register", register);
 route.post("/login", login);
 route.get("/user", auth, admin, findUsers); //PRIVATE
-route.get("/user/:id", findUser);
+route.get("/user/:id", auth, findUser);
 route.delete("/user/:id", auth, admin, destroyUser); //PRIVATE
 
 route.post("/transaction", auth, upload, addTransaction);

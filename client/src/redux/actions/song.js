@@ -25,6 +25,7 @@ export const postSong = (song) => {
     type: POST_SONG,
     payload: async () => {
       try {
+        setAuthToken(localStorage.getItem("token"));
         const response = await API.post("/song", song);
 
         return response.data.data;

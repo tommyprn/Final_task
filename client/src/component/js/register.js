@@ -22,10 +22,12 @@ class Register extends Component {
     event.preventDefault();
     this.props.register(this.state.data);
     this.setState({ data: {} });
+    console.log(this.state.data);
   };
 
   render() {
     const { data } = this.state;
+
     return (
       <Modal size="sm" show={this.props.show} onHide={this.props.onHide}>
         <Modal.Body className="modaldasar">
