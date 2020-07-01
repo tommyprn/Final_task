@@ -1,7 +1,22 @@
 const express = require("express");
 const route = express.Router();
 const { auth: auth, admin: admin } = require("../middleware/auth");
-const { upload } = require("../middleware/upload");
+// const { upload } = require("../middleware/upload");
+const multer = require("multer");
+const path = require("path");
+const crypto = require("crypto");
+
+const storage = multer.diskStorage({
+  destination: "./storage",
+  filename: function (req, file, cb) {
+    crypto.pseudoRandomBytes(16, function (err, raw) {
+      if (err) return cb(err);
+      cb(null, raw.toString("hex") + path.extname(file.originalname));
+    });
+  },
+});
+
+const upload = multer({ storage: storage });
 
 const {
   register,
@@ -44,19 +59,19 @@ route.get("/user", auth, admin, findUsers); //PRIVATE
 route.get("/user/:id", auth, findUser);
 route.delete("/user/:id", auth, admin, destroyUser); //PRIVATE
 
-route.post("/transaction", auth, upload, addTransaction);
+route.post("/transaction", auth, [upload.single("attachment")], addTransaction);
 route.get("/transaction", findTransactions); //PRIVATE
 route.get("/transaction/:id", auth, findTransaction);
 route.patch("/transaction/:id", patchTransaction); //PRIVATE
 route.delete("/transaction/:id", auth, admin, destroyTransaction); //PRIVATE
 
-route.post("/artist", addArtist); //PRIVATE
+route.post("/artist", auth, admin, addArtist); //PRIVATE
 route.get("/artist", findArtists);
 route.get("/artist/:id", auth, findArtist);
 route.patch("/artist/:id", auth, admin, patchArtist); //PRIVATE
 route.delete("/artist/:id", auth, admin, destroyArtist); //PRIVATE
 
-route.post("/song", addSong); //PRIVATE
+route.post("/song", auth, admin, addSong); //PRIVATE
 route.get("/song", findSongs);
 route.get("/song/:id", auth, findSong);
 route.patch("/song/:id", patchSong); //PRIVATE

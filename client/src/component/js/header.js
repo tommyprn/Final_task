@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import LoginModal from "../js/login";
 import RegisterModal from "./register";
 import { connect } from "react-redux";
-import { getUser } from "../../redux/actions/user";
+import { getUser, logout } from "../../redux/actions/user";
 import { Dropdown, DropdownButton, Image } from "react-bootstrap";
 
 function User(props) {
@@ -13,7 +13,7 @@ function User(props) {
       <Link to="/upgrade-plan">
         <li className="profile-dropdown-list">
           <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
-          Payment
+          Upgrade Plan
         </li>
       </Link>
     </div>
@@ -48,41 +48,42 @@ function Admin(props) {
   );
 }
 
-function UserButton(props) {
-  let a = localStorage.getItem("role");
+class UserButton extends Component {
+  render() {
+    let a = localStorage.getItem("role");
+    return (
+      <div className="header-right">
+        <DropdownButton
+          alignRight
+          title={
+            <Image
+              src={
+                "https://img.favpng.com/7/7/17/portrait-drawing-visual-arts-painting-png-favpng-9sxWdF91pWRzCKrTnzgHHrpET_t.jpg"
+              }
+              roundedCircle
+              className="foto-profile"
+            />
+          }
+          id="dropdown-menu"
+          variant="black"
+          className="drop-button"
+        >
+          {a === "true" ? <Admin /> : <User />}
 
-  return (
-    <div className="header-right">
-      <DropdownButton
-        alignRight
-        title={
-          <Image
-            src={
-              "https://img.favpng.com/7/7/17/portrait-drawing-visual-arts-painting-png-favpng-9sxWdF91pWRzCKrTnzgHHrpET_t.jpg"
-            }
-            roundedCircle
-            className="foto-profile"
-          />
-        }
-        id="dropdown-menu"
-        variant="black"
-        className="drop-button"
-      >
-        {a === "true" ? <Admin /> : <User />}
-
-        <Dropdown.Divider />
-        <button onClick={props.handleLogoutClick} className="Logout">
-          <li className="profile-dropdown-list">
-            <i
-              class="fas fa-times"
-              style={{ margin: "10px", color: "red" }}
-            ></i>
-            Logout
-          </li>
-        </button>
-      </DropdownButton>
-    </div>
-  );
+          <Dropdown.Divider />
+          <button className="Logout" onClick={this.props.logout}>
+            <li className="profile-dropdown-list">
+              <i
+                class="fas fa-times"
+                style={{ margin: "10px", color: "red" }}
+              ></i>
+              Logout
+            </li>
+          </button>
+        </DropdownButton>
+      </div>
+    );
+  }
 }
 
 function AuthButton(props) {
@@ -116,25 +117,25 @@ class Header extends Component {
     });
   };
 
-  handleLoginClick = () => {
-    {
-      this.props.user
-        ? this.setState({ isLoggedIn: true })
-        : this.setState({ isLoggedIn: false });
-    }
+  handleLoggedIn = () => {
+    this.setState({ isLogin: true });
   };
 
-  handleLogoutClick = () => {
-    this.setState({ isLoggedIn: false });
-    localStorage.removeItem("role");
-    localStorage.removeItem("id");
-    localStorage.removeItem("token");
-  };
+  // handleLogout = () => {
+  //   localStorage.removeItem("role");
+  //   localStorage.removeItem("id");
+  //   localStorage.removeItem("token");
+  //   this.setState({ isLogin: false });
+  // };
+
+  // isLoggedOut = (isLoggedOut) => {
+  //   this.setState({ logout: isLoggedOut });
+  //   console.log(this.isLogout);
+  // };
 
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
     const { data } = this.props.user;
-    console.log(this.props.user);
+    console.log(this.props.isLogin);
     return (
       <>
         <div className="header">
@@ -147,8 +148,8 @@ class Header extends Component {
             </Link>
           </div>
 
-          {isLoggedIn ? (
-            <UserButton handleLogoutClick={this.handleLogoutClick} />
+          {this.props.isLogin ? (
+            <UserButton logout={this.props.logout} />
           ) : (
             <AuthButton handleToggleModal={this.handleToggleModal} />
           )}
@@ -165,7 +166,7 @@ class Header extends Component {
               <LoginModal
                 show={this.state.isModalOpen}
                 onHide={this.handleToggleModal}
-                handleLoginClick={this.handleLoginClick}
+                handleLoggedIn={this.handleLoggedIn}
               />
             )}
           </>
@@ -178,7 +179,8 @@ class Header extends Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    isLogin: state.user.isLogin,
   };
 };
 
-export default connect(mapStateToProps, { getUser })(Header);
+export default connect(mapStateToProps, { getUser, logout })(Header);

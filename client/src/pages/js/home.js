@@ -2,9 +2,30 @@ import React, { Component } from "react";
 import "../css/home.css";
 import { connect } from "react-redux";
 import { getAllSong } from "../../redux/actions/song";
-import ReactJkMusicPlayer from "react-jinke-music-player";
+import Player from "../../component/js/player";
+import SongGrid from "../../component/js/songgrid";
 
 class Home extends Component {
+  constructor() {
+    super();
+    this.state = {
+      playIndex: 0,
+    };
+    this.audioInstance = null;
+    this.play = true;
+  }
+
+  setPlayIndex = (e) => {
+    this.setState({ playIndex: e });
+  };
+
+  getAudioInstance = (instance) => {
+    this.audioInstance = instance;
+  };
+
+  onPlayHandler = () => (this.play = true);
+  onPauseHandler = () => (this.play = false);
+
   componentDidMount() {
     this.props.getAllSong();
   }
@@ -12,6 +33,7 @@ class Home extends Component {
   render() {
     const { data: songData } = this.props.song;
     let a = Object.values(songData);
+
     return (
       <div className="homes">
         <img
@@ -34,42 +56,21 @@ class Home extends Component {
           <p className="extend-text">Start your music journey now</p>
         </div>
 
-        <div className="thumbnail-song">
-          <div className="row justify-content-start">
-            {a.map((song) => {
-              return (
-                <div className="thumbnail-container">
-                  <img
-                    className="song-box"
-                    src={song.thumbnail}
-                    alt="Singles thumbnail"
-                  />
-                  <div className="detail-container">
-                    <div className="flex-text">
-                      <p>{song.title}</p>
-                      <p className="release-year">{song.year}</p>
-                    </div>
-                    <p className="artist-name">{song.Artist.name}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-        <ReactJkMusicPlayer
-          mode="full"
-          // audioLists={playlist}
-          defaultPlayIndex={0}
-          autoPlay={false}
-          showDownload={false}
-          showThemeSwitch={false}
-          toggleMode={false}
-          responsive={false}
-          showMiniModeCover={true}
-          showDestroy={true}
-          showReload={false}
-          // playIndex={playIndex}
-          onAudioPlay={(audioInfo) => {}}
+        <SongGrid
+          a={a}
+          setPlayIndex={this.setPlayIndex}
+          playIndex={this.state.playIndex}
+          audioInstance={this.audioInstance}
+          play={this.play}
+        />
+
+        <Player
+          music={songData}
+          setPlayIndex={this.setPlayIndex}
+          getAudioInstance={this.getAudioInstance}
+          playIndex={this.state.playIndex}
+          onPlayHandler={this.onPlayHandler}
+          onPauseHandler={this.onPauseHandler}
         />
       </div>
     );

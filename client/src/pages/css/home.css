@@ -88,28 +88,3 @@
 .artist-name {
   font-size: 16px;
 }
-
-.progress-bar {
-  background-color: transparent !important;
-  max-width: 50% !important;
-}
-
-.progress-bar-content {
-  margin-right: -80px;
-}
-
-.player-content {
-  padding-right: 50px;
-}
-
-.play-sounds {
-  padding-right: 20px !important;
-}
-
-.audio-lists-btn {
-  padding-right: 30px !important;
-}
-
-.next-audio {
-  padding-right: 50px;
-}

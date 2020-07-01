@@ -28,54 +28,56 @@ class AddArtist extends Component {
 
     return (
       <form className="form-add-artist" onSubmit={this.handleSubmit}>
-        <p className="judul-add-artist">Add Artist</p>
-        <div>
-          <input
-            name="name"
-            value={data.name ? data.name : ""}
-            type="text"
-            className="custom-input"
-            placeholder="Artist Name"
-            onChange={this.handleChange}
-          />
-        </div>
+        <div className="wraper">
+          <p className="judul-add-artist">Add Artist</p>
+          <div>
+            <input
+              name="name"
+              value={data.name ? data.name : ""}
+              type="text"
+              className="custom-input"
+              placeholder="Artist Name"
+              onChange={this.handleChange}
+            />
+          </div>
 
-        <div>
-          <input
-            name="age"
-            value={data.age ? data.age : ""}
-            type="number"
-            className="custom-input"
-            placeholder="Age"
-            onChange={this.handleChange}
-          />
-        </div>
+          <div>
+            <input
+              name="age"
+              value={data.age ? data.age : ""}
+              type="number"
+              className="custom-input"
+              placeholder="Age"
+              onChange={this.handleChange}
+            />
+          </div>
 
-        <div className="form-group-basic">
-          <input
-            name="type"
-            value={data.type ? data.type : ""}
-            type="text"
-            className="custom-input"
-            placeholder="Type"
-            onChange={this.handleChange}
-          />
-        </div>
+          <div className="form-group-basic">
+            <input
+              name="type"
+              value={data.type ? data.type : ""}
+              type="text"
+              className="custom-input"
+              placeholder="Type"
+              onChange={this.handleChange}
+            />
+          </div>
 
-        <div className="form-group-basic">
-          <input
-            name="debut"
-            value={data.debut ? data.debut : ""}
-            type="number"
-            className="custom-input"
-            placeholder="Debut year"
-            onChange={this.handleChange}
-          />
-        </div>
+          <div className="form-group-basic">
+            <input
+              name="debut"
+              value={data.debut ? data.debut : ""}
+              type="number"
+              className="custom-input"
+              placeholder="Debut year"
+              onChange={this.handleChange}
+            />
+          </div>
 
-        <button className="save-artist" type="submit">
-          Submit
-        </button>
+          <button className="save-artist" type="submit">
+            Submit
+          </button>
+        </div>
       </form>
     );
   }

@@ -3,7 +3,7 @@ import {
   POST_TRANSACTION,
   PATCH_TRANSACTION,
 } from "../constant/action-types";
-import { API } from "../../config/api";
+import { API, setAuthToken } from "../../config/api";
 
 export const getTransaction = () => {
   return {
@@ -28,17 +28,28 @@ export const getTransaction = () => {
   };
 };
 
-export const addTransaction = (transaction) => {
+export const addTransaction = (transaction, id) => {
   return {
     type: POST_TRANSACTION,
     payload: async () => {
       try {
         setAuthToken(localStorage.getItem("token"));
 
+        const formData = new FormData();
+
+        formData.append("userId", id);
+        formData.append("attachment", transaction);
+
+        const config = {
+          headers: {
+            "content-type": "multipart/form-data",
+          },
+        };
+
         const {
           data: { data },
-        } = await API.post("/transaction", transaction);
-
+        } = await API.post("/transaction", formData, config);
+        console.log(data);
         return data;
       } catch (error) {
         if (error.response) {
@@ -56,20 +67,13 @@ export const patchTransaction = (status, id) => {
     type: PATCH_TRANSACTION,
     payload: async () => {
       try {
-        const formData = new FormData();
-        formData.append("status", status);
         setAuthToken(localStorage.getItem("token"));
 
-        const config = {
-          headers: {
-            "content-type": "multipart/form-data",
-          },
-        };
         const {
-          data: { data },
-        } = await API.patch("/transaction/" + id);
+          data: { data: dataUser },
+        } = await API.patch(`/transactions/${id}`, status);
 
-        return data;
+        return dataUser;
       } catch (error) {
         if (error.response) {
           const { data, status } = error.response;

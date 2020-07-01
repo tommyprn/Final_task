@@ -2,22 +2,17 @@ const multer = require("multer");
 
 exports.upload = async (req, res, next) => {
   const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-      if (file.mimetype === "audio/mp3") {
-        cb(null, "audiostorage");
-      } else if (file.mimetype === "image/jpeg") {
-        cb(null, "storage");
-      } else {
-        console.log(file.mimetype);
-        cb({ error: "Mime type not supported" });
-      }
-    },
+    destination: "./storage",
     filename: function (req, file, cb) {
-      cb(null, Date.now() + "-" + file.originalname);
+      crypto.pseudoRandomBytes(16, function (err, raw) {
+        if (err) return cb(err);
+
+        cb(null, raw.toString("hex") + path.extname(file.originalname));
+      });
     },
   });
 
-  const upload = multer({ storage: storage }).single("attachment");
+  const upload = multer({ storage: storage });
 
   upload(req, res, function (error) {
     if (error instanceof multer.MulterError) {

@@ -12,15 +12,12 @@ class Plan extends Component {
   }
 
   handleChange = (event) => {
-    const { data } = this.state;
-    this.setState({
-      data: { ...data, [event.target.name]: event.target.value },
-    });
+    this.setState({ data: event.target.files[0] });
   };
 
-  handleSubmit = (event, id) => {
+  handleSubmit = async (event) => {
     event.preventDefault();
-    this.props.addTransaction(this.state.data);
+    this.props.addTransaction(this.state.data, localStorage.getItem("id"));
     this.setState({ data: {} });
   };
 

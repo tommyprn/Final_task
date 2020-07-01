@@ -1,3 +1,7 @@
+.wraper {
+  position: absolute;
+  left: 367px;
+}
 .form-add-artist {
   display: block;
   text-align: center;
@@ -9,8 +13,7 @@
   color: red;
   font-size: 30px;
   position: absolute;
-  left: 367px;
-  top: 170px;
+  top: -70px;
 }
 
 .save-artist {

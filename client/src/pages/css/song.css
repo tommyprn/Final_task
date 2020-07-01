@@ -1,16 +1,17 @@
 .form-add-song {
+  position: absolute;
   display: block;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 160px;
   background-color: black;
+  left: 367px;
 }
 
 .judul-add-song {
   color: red;
   font-size: 30px;
   position: absolute;
-  left: 367px;
-  top: 170px;
+  top: -70px;
 }
 
 .save-song {
@@ -28,13 +29,12 @@
   border: solid grey;
   width: 800px;
   background-color: rgb(53, 53, 53);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .add-artistId {
   width: 800px !important;
-  margin-bottom: 20px;
-  margin-left: 367px;
+  margin-bottom: 30px;
   background-color: rgb(53, 53, 53) !important;
   color: rgb(126, 126, 126) !important;
   border-radius: 5px !important;

@@ -1,5 +1,5 @@
 import { GET_ALL_ARTIST, POST_ARTIST } from "../constant/action-types";
-import { API } from "../../config/api";
+import { API, setAuthToken } from "../../config/api";
 
 export const getAllArtist = () => {
   return {
@@ -27,6 +27,8 @@ export const postArtist = (artist) => {
     type: POST_ARTIST,
     payload: async () => {
       try {
+        setAuthToken(localStorage.getItem("token"));
+
         const {
           data: { data },
         } = await API.post("/artist", artist);

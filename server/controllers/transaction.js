@@ -54,6 +54,7 @@ exports.create = async (req, res) => {
       dueDate: d2,
       attachment: req.file.filename,
     });
+
     res.send({ data: transaction });
   } catch (error) {
     console.log(error);

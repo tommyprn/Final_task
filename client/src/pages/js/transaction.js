@@ -13,14 +13,27 @@ class Transaction extends Component {
     this.props.getTransaction();
   }
 
-  constructor(props) {
-    super(props);
+  // constructor(props) {
+  //   super(props);
+  //   this.state = { data: {} };
+  // }
 
-    this.state = { data: { gender: "male" } };
-  }
+  handleOnClick = (event) => {
+    event.preventDefault();
 
-  handleChange = async (status, id) => {
-    this.props.patchTransaction(status, id);
+    const { dataTransaction, status } = event.target.dataset;
+
+    if (dataTransaction && status === "Approved") {
+      this.props.patchTransaction({ status: "Approved" }, dataTransaction);
+      setTimeout(() => {
+        this.props.getTransaction();
+      }, 250);
+    } else if (dataTransaction && status === "Cancel") {
+      this.props.patchTransaction({ status: "Cancel" }, dataTransaction);
+      setTimeout(() => {
+        this.props.getTransaction();
+      }, 250);
+    }
   };
 
   render() {
@@ -94,9 +107,7 @@ class Transaction extends Component {
                         className="text-success"
                         name="status"
                         value="Approved"
-                        onClick={() =>
-                          this.handleChange("Approved", transactionDetail.id)
-                        }
+                        onClick={() => this.handleOnClick}
                       >
                         Approved
                       </Dropdown.Item>
@@ -104,9 +115,7 @@ class Transaction extends Component {
                         eventKey="2"
                         className="text-danger"
                         value="Cancel"
-                        onClick={() =>
-                          this.handleChange("Cancel", transactionDetail.id)
-                        }
+                        onClick={() => this.handleOnClick}
                       >
                         Cancel
                       </Dropdown.Item>

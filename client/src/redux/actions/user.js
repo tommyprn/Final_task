@@ -1,5 +1,6 @@
 import {
   LOGIN,
+  LOGOUT,
   REGISTER,
   GET_USER,
   GET_ALL_USER,
@@ -15,7 +16,7 @@ export const login = (users) => {
           data: { data },
         } = await API.post("/login", users);
 
-        localStorage.setItem("id", data.id);
+        // localStorage.setItem("id", data.id);
         localStorage.setItem("token", data.token);
         setAuthToken(data.token);
 
@@ -23,7 +24,7 @@ export const login = (users) => {
         const {
           data: { data: dataUser },
         } = await API.get("/user/" + ids);
-        localStorage.setItem("role", dataUser.role);
+        // localStorage.setItem("role", dataUser.role);
 
         return dataUser;
       } catch (error) {
@@ -34,6 +35,16 @@ export const login = (users) => {
         }
       }
     },
+  };
+};
+
+export const logout = () => {
+  localStorage.removeItem("role");
+  localStorage.removeItem("id");
+  localStorage.removeItem("token");
+
+  return {
+    type: LOGOUT,
   };
 };
 

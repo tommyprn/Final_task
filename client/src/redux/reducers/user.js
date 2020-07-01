@@ -1,12 +1,14 @@
 import {
   REGISTER,
   LOGIN,
+  LOGOUT,
   GET_USER,
   GET_ALL_USER,
 } from "../constant/action-types";
 import { ActionType } from "redux-promise-middleware";
 
 const initialState = {
+  isLogin: false,
   data: {},
   loading: false,
   error: null,
@@ -39,13 +41,23 @@ const userReducer = (state = initialState, action) => {
         loading: true,
       };
     case GET_USER_FULFILLED:
-    case REGISTER_FULFILLED:
-    case LOGIN_FULFILLED:
     case GET_ALL_USER_FULFILLED:
       return {
         ...state,
         loading: false,
         data: action.payload,
+      };
+    case REGISTER_FULFILLED:
+    case LOGIN_FULFILLED:
+      return {
+        ...state,
+        isLogin: true,
+        loading: false,
+        data: action.payload,
+      };
+    case LOGOUT:
+      return {
+        ...initialState,
       };
     case GET_USER_REJECTED:
     case REGISTER_REJECTED:

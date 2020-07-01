@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "../css/login.css";
 import { connect } from "react-redux";
 import { login } from "../../redux/actions/user";
@@ -22,12 +22,13 @@ class Login extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.login(this.state.data);
-    this.setState({ data: {} });
+    this.setState({ data: {} }, this.props.onHide);
   };
 
   render() {
     const { data } = this.state;
-
+    // console.log(this.props.user);
+    // console.log(this.props.isLogin);
     return (
       <Modal size="sm" show={this.props.show} onHide={this.props.onHide}>
         <Modal.Body className="modaldasar">
@@ -55,11 +56,7 @@ class Login extends React.Component {
               />
             </Form.Group>
 
-            <button
-              type="submit"
-              className="tombollogin"
-              onClick={this.props.handleLoginClick}
-            >
+            <button type="submit" className="tombollogin">
               Login
             </button>
             <p className="kalimat-baru">
@@ -79,6 +76,7 @@ class Login extends React.Component {
 const mapStateToProps = (state) => {
   return {
     user: state.user,
+    isLogin: state.user.isLogin,
   };
 };
 

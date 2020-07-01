@@ -9,6 +9,7 @@ export const GET_SONG = "GET_SONG";
 //User
 export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
 export const GET_USER = "GET_USER";
 export const GET_ALL_USER = "GET_ALL_USER";
 
