@@ -13,32 +13,13 @@ class Transaction extends Component {
     this.props.getTransaction();
   }
 
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { data: {} };
-  // }
-
-  handleOnClick = (event) => {
-    event.preventDefault();
-
-    const { dataTransaction, status } = event.target.dataset;
-
-    if (dataTransaction && status === "Approved") {
-      this.props.patchTransaction({ status: "Approved" }, dataTransaction);
-      setTimeout(() => {
-        this.props.getTransaction();
-      }, 250);
-    } else if (dataTransaction && status === "Cancel") {
-      this.props.patchTransaction({ status: "Cancel" }, dataTransaction);
-      setTimeout(() => {
-        this.props.getTransaction();
-      }, 250);
-    }
+  handleOnChange = async (status, id) => {
+    this.props.patchTransaction(status, id);
   };
 
   render() {
     const { data: dataTransaction } = this.props.transaction;
-    let a = Object.values(dataTransaction);
+    let transactionData = Object.values(dataTransaction);
 
     return (
       <div>
@@ -56,19 +37,23 @@ class Transaction extends Component {
             </tr>
           </thead>
           <tbody className="badan-tabel">
-            {a.map((transactionDetail, i) => {
+            {transactionData.map((transactionDetail, i) => {
+              let range = Math.round(
+                moment(transactionDetail.dueDate)
+                  .startOf("days")
+                  .diff(moment().startOf("hour"), "days", true)
+              );
+
+              if (range < 1) {
+                transactionDetail.status = "Not Active";
+              }
               return (
                 <tr key={transactionDetail.id}>
                   <th>{i + 1}</th>
                   <th>{transactionDetail.User.fullName}</th>
                   <th>{transactionDetail.attachment}</th>
                   <th>
-                    {Math.round(
-                      moment(transactionDetail.dueDate)
-                        .startOf("days")
-                        .diff(moment().startOf("hour"), "days", true)
-                    )}{" "}
-                    days
+                    {transactionDetail.status === "Approved" ? range : "0"} days
                   </th>
                   <th
                     style={
@@ -107,7 +92,9 @@ class Transaction extends Component {
                         className="text-success"
                         name="status"
                         value="Approved"
-                        onClick={() => this.handleOnClick}
+                        onClick={() =>
+                          this.handleOnChange("Approved", transactionDetail.id)
+                        }
                       >
                         Approved
                       </Dropdown.Item>
@@ -115,7 +102,9 @@ class Transaction extends Component {
                         eventKey="2"
                         className="text-danger"
                         value="Cancel"
-                        onClick={() => this.handleOnClick}
+                        onClick={() =>
+                          this.handleOnChange("Cancel", transactionDetail.id)
+                        }
                       >
                         Cancel
                       </Dropdown.Item>

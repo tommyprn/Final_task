@@ -37,7 +37,6 @@ exports.admin = async (req, res, next) => {
         res.status(400).send({ message: "Admin account required!" });
       }
     } catch (error) {
-      console.log(error);
       res.status(400).send({ message: "Wrong admin token" });
     }
   }

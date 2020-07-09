@@ -25,12 +25,12 @@ exports.login = async (req, res) => {
       where: { email },
     });
     if (!user)
-      return res.status(400).send({ message: "Wrong Email/ password" });
+      return res.status(400).send({ error: { message: "Wrong email" } });
 
     //Password error on login
     const validPass = await bcrypt.compare(password, user.password);
     if (!validPass)
-      return res.status(400).send({ message: "Wrong password/email" });
+      return res.status(400).send({ error: { message: "Wrong password" } });
 
     const token = jwt.sign({ id: user.id }, process.env.MY_SECRET);
     const id = user.id;

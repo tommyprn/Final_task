@@ -17,13 +17,12 @@ class Plan extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    this.props.addTransaction(this.state.data, localStorage.getItem("id"));
+    this.props.addTransaction(this.state.data, this.props.user.data.id);
     this.setState({ data: {} });
   };
 
   render() {
     const { data } = this.state;
-
     return (
       <div className="premium">
         <div className="upgrade-plan">
@@ -51,6 +50,8 @@ class Plan extends Component {
               Attach Transfer Proof
             </label>
             <p></p>
+            {/* <img src={"http://localhost:5000/public/" + this.state.data.name} /> */}
+
             <button type="submit" className="kirim">
               Send
             </button>
@@ -64,6 +65,7 @@ class Plan extends Component {
 const mapStateToProps = (state) => {
   return {
     transaction: state.transaction,
+    user: state.user,
   };
 };
 

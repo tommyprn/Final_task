@@ -4,6 +4,7 @@ export const POST_ARTIST = "POST_ARTIST";
 
 //Song
 export const POST_SONG = "POST_SONG";
+export const GET_ALL_SONG = "GET_ALL_SONG";
 export const GET_SONG = "GET_SONG";
 
 //User

@@ -11,7 +11,7 @@ const initialState = {
   isLogin: false,
   data: {},
   loading: false,
-  error: null,
+  error: {},
 };
 
 const REGISTER_PENDING = `${REGISTER}_${ActionType.Pending}`;

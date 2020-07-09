@@ -12,9 +12,8 @@
 
 .rectangle {
   position: absolute;
-  min-width: 100%;
+  width: 100%;
   height: 400px;
-  left: -40px;
   top: 670px;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) -92.86%, #000000 60.83%);
   background-blend-mode: hard-light;

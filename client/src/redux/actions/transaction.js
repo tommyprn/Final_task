@@ -4,6 +4,7 @@ import {
   PATCH_TRANSACTION,
 } from "../constant/action-types";
 import { API, setAuthToken } from "../../config/api";
+import moment from "moment";
 
 export const getTransaction = () => {
   return {
@@ -49,7 +50,6 @@ export const addTransaction = (transaction, id) => {
         const {
           data: { data },
         } = await API.post("/transaction", formData, config);
-        console.log(data);
         return data;
       } catch (error) {
         if (error.response) {
@@ -70,14 +70,22 @@ export const patchTransaction = (status, id) => {
         setAuthToken(localStorage.getItem("token"));
 
         const {
-          data: { data: dataUser },
-        } = await API.patch(`/transactions/${id}`, status);
+          data: { data },
+        } = await API.patch(`/transaction/${id}`, {
+          status: status,
+          dueDate: moment().add(31, "days"),
+        });
 
-        return dataUser;
+        const {
+          data: { data: dataNew },
+        } = await API.get("/transaction");
+
+        console.log(dataNew);
+        return dataNew;
       } catch (error) {
         if (error.response) {
           const { data, status } = error.response;
-
+          console.log(error.response);
           if (status > 399) throw data.error;
         }
       }

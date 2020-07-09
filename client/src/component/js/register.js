@@ -21,8 +21,7 @@ class Register extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.register(this.state.data);
-    this.setState({ data: {} });
-    console.log(this.state.data);
+    this.setState({ data: {} }, this.props.onHide);
   };
 
   render() {

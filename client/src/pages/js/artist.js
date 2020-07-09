@@ -77,6 +77,7 @@ class AddArtist extends Component {
           <button className="save-artist" type="submit">
             Submit
           </button>
+          <div></div>
         </div>
       </form>
     );

@@ -16,7 +16,6 @@ export const login = (users) => {
           data: { data },
         } = await API.post("/login", users);
 
-        // localStorage.setItem("id", data.id);
         localStorage.setItem("token", data.token);
         setAuthToken(data.token);
 
@@ -24,7 +23,6 @@ export const login = (users) => {
         const {
           data: { data: dataUser },
         } = await API.get("/user/" + ids);
-        // localStorage.setItem("role", dataUser.role);
 
         return dataUser;
       } catch (error) {

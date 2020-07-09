@@ -76,7 +76,7 @@ exports.update = async (req, res) => {
       const update = await Transaction.update(req.body, {
         where: { id: check.id },
       });
-      if (update < 1) {
+      if (update < 0) {
         return res
           .status(400)
           .send({ message: "you make no difference in User with id: " + id });

@@ -33,7 +33,7 @@ class Home extends Component {
   render() {
     const { data: songData } = this.props.song;
     let a = Object.values(songData);
-
+    const user = this.props.user;
     return (
       <div className="homes">
         <img
@@ -63,15 +63,18 @@ class Home extends Component {
           audioInstance={this.audioInstance}
           play={this.play}
         />
-
-        <Player
-          music={songData}
-          setPlayIndex={this.setPlayIndex}
-          getAudioInstance={this.getAudioInstance}
-          playIndex={this.state.playIndex}
-          onPlayHandler={this.onPlayHandler}
-          onPauseHandler={this.onPauseHandler}
-        />
+        {this.props.isLogin && user.data.status ? (
+          <Player
+            music={songData}
+            setPlayIndex={this.setPlayIndex}
+            getAudioInstance={this.getAudioInstance}
+            playIndex={this.state.playIndex}
+            onPlayHandler={this.onPlayHandler}
+            onPauseHandler={this.onPauseHandler}
+          />
+        ) : (
+          <div />
+        )}
       </div>
     );
   }
@@ -80,6 +83,8 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     song: state.song,
+    user: state.user,
+    isLogin: state.user.isLogin,
   };
 };
 

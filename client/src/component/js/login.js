@@ -9,6 +9,7 @@ class Login extends React.Component {
     super(props);
     this.state = {
       data: {},
+      error: {},
     };
   }
 
@@ -22,13 +23,15 @@ class Login extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.login(this.state.data);
-    this.setState({ data: {} }, this.props.onHide);
+    this.setState({ data: {} });
   };
 
   render() {
+    const { data: dataUser, error } = this.props.user;
     const { data } = this.state;
-    // console.log(this.props.user);
-    // console.log(this.props.isLogin);
+    if (this.props.isLogin) {
+      this.setState(this.props.close);
+    }
     return (
       <Modal size="sm" show={this.props.show} onHide={this.props.onHide}>
         <Modal.Body className="modaldasar">
@@ -55,7 +58,7 @@ class Login extends React.Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-
+            {error ? <p className="error-message">{error.message}</p> : <p></p>}
             <button type="submit" className="tombollogin">
               Login
             </button>
@@ -77,6 +80,7 @@ const mapStateToProps = (state) => {
   return {
     user: state.user,
     isLogin: state.user.isLogin,
+    error: state.user.error,
   };
 };
 

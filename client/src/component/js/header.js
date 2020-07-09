@@ -7,50 +7,62 @@ import { connect } from "react-redux";
 import { getUser, logout } from "../../redux/actions/user";
 import { Dropdown, DropdownButton, Image } from "react-bootstrap";
 
-function User(props) {
-  return (
-    <div>
-      <Link to="/upgrade-plan">
-        <li className="profile-dropdown-list">
-          <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
-          Upgrade Plan
-        </li>
-      </Link>
-    </div>
-  );
+class User extends Component {
+  render() {
+    return (
+      <div>
+        <Link to="/upgrade-plan">
+          <li className="profile-dropdown-list">
+            <i
+              class="fas fa-donate"
+              style={{ margin: "10px", color: "red" }}
+            ></i>
+            Upgrade Plan
+          </li>
+        </Link>
+      </div>
+    );
+  }
 }
 
-function Admin(props) {
-  return (
-    <div>
-      <Link to="/Song">
-        <li className="profile-dropdown-list">
-          <i class="fas fa-music" style={{ margin: "10px", color: "red" }}></i>
-          Add Music
-        </li>
-      </Link>
-      <Link to="/artist">
-        <li className="profile-dropdown-list">
-          <i
-            class="fas fa-user-plus"
-            style={{ margin: "10px", color: "red" }}
-          ></i>
-          Add Artist
-        </li>
-      </Link>
-      <Link to="/transaction">
-        <li className="profile-dropdown-list">
-          <i class="fas fa-donate" style={{ margin: "10px", color: "red" }}></i>
-          Transaction
-        </li>
-      </Link>
-    </div>
-  );
+class Admin extends Component {
+  render() {
+    return (
+      <div>
+        <Link to="/Song">
+          <li className="profile-dropdown-list">
+            <i
+              class="fas fa-music"
+              style={{ margin: "10px", color: "red" }}
+            ></i>
+            Add Music
+          </li>
+        </Link>
+        <Link to="/artist">
+          <li className="profile-dropdown-list">
+            <i
+              class="fas fa-user-plus"
+              style={{ margin: "10px", color: "red" }}
+            ></i>
+            Add Artist
+          </li>
+        </Link>
+        <Link to="/transaction">
+          <li className="profile-dropdown-list">
+            <i
+              class="fas fa-donate"
+              style={{ margin: "10px", color: "red" }}
+            ></i>
+            Transaction
+          </li>
+        </Link>
+      </div>
+    );
+  }
 }
 
 class UserButton extends Component {
   render() {
-    let a = localStorage.getItem("role");
     return (
       <div className="header-right">
         <DropdownButton
@@ -68,39 +80,46 @@ class UserButton extends Component {
           variant="black"
           className="drop-button"
         >
-          {a === "true" ? <Admin /> : <User />}
+          {this.props.role ? <Admin /> : <User />}
 
           <Dropdown.Divider />
-          <button className="Logout" onClick={this.props.logout}>
-            <li className="profile-dropdown-list">
-              <i
-                class="fas fa-times"
-                style={{ margin: "10px", color: "red" }}
-              ></i>
-              Logout
-            </li>
-          </button>
+          <Link to="/">
+            <button className="Logout" onClick={this.props.logout}>
+              <li className="profile-dropdown-list">
+                <i
+                  class="fas fa-times"
+                  style={{ margin: "10px", color: "red" }}
+                ></i>
+                Logout
+              </li>
+            </button>
+          </Link>
         </DropdownButton>
       </div>
     );
   }
 }
 
-function AuthButton(props) {
-  return (
-    <div className="header-right">
-      <button
-        onClick={() => props.handleToggleModal(true)}
-        className="register"
-      >
-        Register
-      </button>
+class AuthButton extends Component {
+  render() {
+    return (
+      <div className="header-right">
+        <button
+          onClick={() => this.props.handleToggleModal(true)}
+          className="register"
+        >
+          Register
+        </button>
 
-      <button onClick={() => props.handleToggleModal(false)} className="login">
-        Login
-      </button>
-    </div>
-  );
+        <button
+          onClick={() => this.props.handleToggleModal(false)}
+          className="login"
+        >
+          Login
+        </button>
+      </div>
+    );
+  }
 }
 
 class Header extends Component {
@@ -117,25 +136,12 @@ class Header extends Component {
     });
   };
 
-  handleLoggedIn = () => {
-    this.setState({ isLogin: true });
+  handleCloseModal = () => {
+    this.setState({ isModalOpen: false });
   };
-
-  // handleLogout = () => {
-  //   localStorage.removeItem("role");
-  //   localStorage.removeItem("id");
-  //   localStorage.removeItem("token");
-  //   this.setState({ isLogin: false });
-  // };
-
-  // isLoggedOut = (isLoggedOut) => {
-  //   this.setState({ logout: isLoggedOut });
-  //   console.log(this.isLogout);
-  // };
 
   render() {
     const { data } = this.props.user;
-    console.log(this.props.isLogin);
     return (
       <>
         <div className="header">
@@ -149,7 +155,7 @@ class Header extends Component {
           </div>
 
           {this.props.isLogin ? (
-            <UserButton logout={this.props.logout} />
+            <UserButton logout={this.props.logout} role={data.role} />
           ) : (
             <AuthButton handleToggleModal={this.handleToggleModal} />
           )}
@@ -166,7 +172,7 @@ class Header extends Component {
               <LoginModal
                 show={this.state.isModalOpen}
                 onHide={this.handleToggleModal}
-                handleLoggedIn={this.handleLoggedIn}
+                close={this.handleCloseModal}
               />
             )}
           </>

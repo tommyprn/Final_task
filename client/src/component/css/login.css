@@ -45,3 +45,9 @@
   font-weight: bold;
   color: red !important;
 }
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-left: 15px;
+}

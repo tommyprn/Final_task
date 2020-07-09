@@ -16,7 +16,6 @@ class AddSong extends Component {
     this.setState({
       data: { ...data, [event.target.name]: event.target.value },
     });
-    console.log(data);
   };
 
   handleSubmit = (event) => {
@@ -32,7 +31,7 @@ class AddSong extends Component {
   render() {
     const { data } = this.state;
     const { data: dataArtist } = this.props.artist;
-    let a = Object.values(dataArtist);
+    let artist = Object.values(dataArtist);
 
     return (
       <form className="form-add-song" onSubmit={this.handleSubmit}>
@@ -78,7 +77,7 @@ class AddSong extends Component {
           placeholder="Artist"
           className="add-artistId"
         >
-          {a.map((artist) => {
+          {artist.map((artist) => {
             return <option value={artist.id}>{artist.name}</option>;
           })}
         </Form.Control>
